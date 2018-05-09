@@ -1,4 +1,4 @@
-package br.edu.eteczl.thiagoafonso.ProjetoHibernate.model;
+package br.edu.eteczl.thiagoafonso.ProjetoHibernate.persistence;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
 
-import br.edu.eteczl.thiagoafonso.ProjetoHibernate.persistence.IDAO;
+import br.edu.eteczl.thiagoafonso.ProjetoHibernate.model.Cliente;
 
 public class ClienteHibernateDAO<T> implements IDAO<T>{
 
@@ -35,7 +35,7 @@ public class ClienteHibernateDAO<T> implements IDAO<T>{
 				));
 		Query<Cliente> createdQuery = session.createQuery(qry);
 		List<Cliente> resultList = createdQuery.getResultList();
-		return resultList().size();
+		return resultList.size();
 	}
 	
 	public void persistir(T o) {
@@ -46,14 +46,14 @@ public class ClienteHibernateDAO<T> implements IDAO<T>{
 		CriteriaBuilder cB = this.session.getCriteriaBuilder();
 		CriteriaDelete<Cliente> qryDelete = cB.createCriteriaDelete(Cliente.class);
 		Root<Cliente> deleteFrom = qryDelete.from(Cliente.class);
-		this.session.createCriteria(qryDelete).executeUpdate();
+		this.session.createQuery(qryDelete).executeUpdate();
 	}
 	
 	public List<T> Listar(){
 		CriteriaBuilder cB = this.session.getCriteriaBuilder();
 		CriteriaQuery<Cliente> qry = cB.createQuery(Cliente.class);
-		qry.select(qry.from(cliente.class));
-		Query<T> createdQuery = (Query<T>) this.session.createCriteria(qry);
+		qry.select(qry.from(Cliente.class));
+		Query<T> createdQuery = (Query<T>) this.session.createQuery(qry);
 		return createdQuery.getResultList();
 	}
 
