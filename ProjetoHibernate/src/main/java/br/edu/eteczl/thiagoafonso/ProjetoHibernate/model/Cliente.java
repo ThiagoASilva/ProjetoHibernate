@@ -1,17 +1,30 @@
 package br.edu.eteczl.thiagoafonso.ProjetoHibernate.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Cliente {
 
-	private Integer id_cliente;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id_cliente;
+	
+	@Column
 	private String nome;
+	
+	@Column
 	private String endereco;
+	
+	@Column
 	private String fone;
 	
-	public Cliente() {
-		Cliente cl = new Cliente();
-	}
 	
-	public Integer getId_cliente() {
+	public int getId_cliente() {
 		return id_cliente;
 	}
 	public void setId_cliente(Integer id_cliente) {
