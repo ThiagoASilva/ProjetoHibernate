@@ -80,16 +80,17 @@ public class App extends JFrame
       cl6.setFone("1122223344");
       clList.add(cl6);
       
-      for(int i = 0; i < clList.size(); i++) {
-    	  
-      Session session = HibernateUtil.getSessionFactory().openSession();      
-      
+      Session session = HibernateUtil.getSessionFactory().openSession();            
       ClienteHibernateDAO<Cliente> clienteDao = new ClienteHibernateDAO<Cliente>(session);
+      
+      for(int i = 0; i < clList.size(); i++) {
+
       clienteDao.beginTransaction();
       clienteDao.persistir(clList.get(i));
       clienteDao.commit();
-      clienteDao.closeSession();
+      
       }
       
+      clienteDao.closeSession();
   }
 }
